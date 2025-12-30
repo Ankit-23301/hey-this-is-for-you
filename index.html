@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  height:100vh;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Poppins',sans-serif;
+}
+.container{
+  background:#fff;
+  color:#000;
+  width:90%;
+  max-width:420px;
+  padding:22px;
+  border-radius:18px;
+  text-align:center;
+  animation:fade .4s ease;
+}
+img{
+  width:200px;
+  margin-bottom:15px;
+}
+p{
+  font-size:16px;
+  line-height:1.4;
+  white-space:pre-line;
+}
+button{
+  padding:8px 20px;
+  margin:6px;
+  border-radius:20px;
+  border:none;
+  background:#ffb6c1;
+  font-weight:600;
+  cursor:pointer;
+}
+button:hover{
+  background:#ff9fb5;
+}
+@keyframes fade{
+  from{opacity:0;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="app"></div>
+
+<script>
+const app = document.getElementById("app");
+let musicStarted = false;
+
+function startMusic(){
+  if(!musicStarted){
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.4;
+    music.play();
+    musicStarted = true;
+  }
+}
+
+const screens = [
+  {
+    img: "hehe.png",
+    text: "Hey! I made something for you 💕\nWill you see it?",
+    buttons: [
+      {text:"Yes 🥰", next:1},
+      {text:"No 😒", next:2}
+    ]
+  },
+  {
+    img: "hehe.png",
+    text: "Hehe 😄\nClick below for a cute surprise 🎁",
+    buttons: [
+      {text:"Next 👉", next:3}
+    ]
+  },
+  {
+    img: "how dare u.png",
+    text: "HOW DARE YOUU 😤🔫",
+    buttons: [
+      {text:"SORRY 😭", next:0}
+    ]
+  },
+  {
+    img: "hehe.png",
+    text: "Happy New Year my kuchupuchu 💖\nClick to open the gift 🎀",
+    buttons: [
+      {text:"Open 🎁", next:4}
+    ]
+  },
+  {
+    img: "hehe.png",
+    text: "I Love You ❤️\nHappy New Year 2026 🥂✨",
+    buttons: []
+  }
+];
+
+function render(i){
+  const s = screens[i];
+  app.innerHTML = `
+    <img src="${s.img}">
+    <p>${s.text}</p>
+    ${s.buttons.map(
+      b=>`<button onclick="startMusic(); render(${b.next})">${b.text}</button>`
+    ).join("")}
+  `;
+}
+
+render(0);
+</script>
+
+</body>
+</html>
